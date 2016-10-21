@@ -24,8 +24,16 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')
-        //          ->hourly();
+        // run hourly `php artisan inspire`.
+        $schedule->command('inspire')
+                  ->hourly();
+
+        // run bash command `touch test.txt1 every 5 minutes.
+        $schedule->exec('touch test.txt')
+                ->everyFiveMinutes();
+
+        // you can specify the time of day
+        $schedule->command('php artisan cache:clear')->dailyAt('23:59');
     }
 
     /**
